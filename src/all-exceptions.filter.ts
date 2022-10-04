@@ -1,5 +1,6 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common'
 import { HttpAdapterHost } from '@nestjs/core'
+
 import { ErrorResponse } from './utils/response'
 
 interface IErrorMSG {
@@ -27,16 +28,17 @@ export class AllExceptionsFilter implements ExceptionFilter {
         ? (exception?.getResponse() as IErrorMSG)
         : HttpStatus.INTERNAL_SERVER_ERROR
 
+    const msg =
+      exception instanceof HttpException
+        ? err
+        : exception instanceof Error
+        ? exception.message
+        : exception
+
     const responseBody: ErrorResponse = {
       success: false,
-      messages:
-        exception instanceof HttpException
-          ? err
-          : exception instanceof Error
-          ? exception.message
-          : 'Internal server error'
+      messages: msg
     }
-
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus)
   }
 }
