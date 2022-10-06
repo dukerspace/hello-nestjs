@@ -27,12 +27,7 @@ jobs:
       - name: Build, tag, and push image to Docker Hub
         run: |
           docker build -t $TEAM/$REPOSITORY:$TAG_NAME -f Dockerfile \
-            --build-arg ADMIN_JWT_SECRET=${{ secrets.ADMIN_JWT_SECRET }}  \
             --build-arg DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} \
-            --build-arg AWS_BUCKET=${{ secrets.AWS_BUCKET }} \
-            --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
-            --build-arg AWS_ACCESS_SECRET=${{ secrets.AWS_ACCESS_SECRET }} \
-            --build-arg AWS_REGION=${{ secrets.AWS_REGION }} .
           docker push $TEAM/$REPOSITORY:$TAG_NAME
           docker image rm $TEAM/$REPOSITORY:$TAG_NAME
 
