@@ -33,7 +33,7 @@ export class UsersService {
   }
 
   async findOne(id: number): Promise<User> {
-    return this.userRepository.findOne({ where: { id: id } })
+    return this.userRepository.findOne({ where: { id: id }, relations: ['blogs'] })
   }
 
   // @todo check password match before update

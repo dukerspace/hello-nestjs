@@ -1,22 +1,32 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { User } from 'src/users/entities/user.entity'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm'
 
 @Entity()
 export class Blog {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ name: 'user_id' })
-  userId: number
+  @JoinColumn({ name: 'user_id' })
+  @ManyToOne(() => User, (user) => user.blogs)
+  user: number
 
-  @Column({ type: 'character varying', length: 255 })
+  @Column({ length: 255 })
   title: string
 
-  @Column({ type: 'text' })
-  detail: string
+  @Column({ type: 'text', nullable: true })
+  detail?: string
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date
+  createdAt?: Date
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date
+  updatedAt?: Date
 }
