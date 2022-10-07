@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common'
 import { BlogService } from './blog.service'
 import { CreateBlogDto } from './dto/create-blog.dto'
 import { UpdateBlogDto } from './dto/update-blog.dto'
 
-@Controller('blog')
+@Controller('blogs')
 export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
@@ -13,8 +13,8 @@ export class BlogController {
   }
 
   @Get()
-  findAll() {
-    return this.blogService.findAll()
+  findAll(@Query('page') page: number, @Query('limit') limit: number) {
+    return this.blogService.findAll(page, limit)
   }
 
   @Get(':id')
