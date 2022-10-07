@@ -16,7 +16,7 @@ export class Blog {
 
   @JoinColumn({ name: 'user_id' })
   @ManyToOne(() => User, (user) => user.blogs)
-  user: User
+  user: number
 
   @Column({ length: 255 })
   title: string

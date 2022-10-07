@@ -8,6 +8,7 @@ import { BlogModule } from './blog/blog.module'
 
 import { UsersModule } from './users/users.module'
 import { ProductModule } from './product/product.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { ProductModule } from './product/product.module';
     UsersModule,
     AuthModule,
     BlogModule,
-    ProductModule
+    ProductModule,
+    CategoryModule
   ],
   controllers: [],
   providers: [

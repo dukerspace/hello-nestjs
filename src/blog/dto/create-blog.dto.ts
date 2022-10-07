@@ -2,7 +2,7 @@ import { IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class CreateBlogDto {
   @IsNumber()
-  userId: number
+  user: number
 
   @IsString()
   title: string
