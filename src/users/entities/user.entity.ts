@@ -34,6 +34,6 @@ export class User {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date
 
-  @OneToMany(() => Blog, (blog) => blog.userId)
+  @OneToMany(() => Blog, (blog) => blog.user)
   blogs: Blog[]
 }
